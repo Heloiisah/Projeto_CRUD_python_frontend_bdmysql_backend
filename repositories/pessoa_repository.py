@@ -60,5 +60,5 @@ class PessoaRepository:
        db.delete(pessoa_bd)
        db.commit()
 
-       return{"Mensagem": "Pessoa Excluída com Sucesso!!"}
+       return{"Mensagem": "Pessoa Excluída com Sucesso!"}
    
