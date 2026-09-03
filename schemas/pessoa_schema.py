@@ -1,5 +1,6 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from datetime import date
+import re
 
 class PessoaSchema(BaseModel):
     nome : str
@@ -13,3 +14,10 @@ class PessoaSchema(BaseModel):
     bairro : str
     cidade : str
     uf : str
+    
+    @field_validator("cpf", "cep", mode="before")
+    @classmethod
+    def remove_non_digits(cls, v):
+        if isinstance(v, str):
+            v = re.sub(r'\D', '', v)
+        return v
