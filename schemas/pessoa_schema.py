@@ -13,4 +13,3 @@ class PessoaSchema(BaseModel):
     bairro : str
     cidade : str
     uf : str
-    

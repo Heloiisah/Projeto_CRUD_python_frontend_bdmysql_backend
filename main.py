@@ -6,6 +6,7 @@ from routes.pessoa_route import router as pessoa_router
 
 app = FastAPI()
 
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
