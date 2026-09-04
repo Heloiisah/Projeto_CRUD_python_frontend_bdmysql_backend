@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 
 from routes.pessoa_route import router as pessoa_router
+from routes.corrida_route import router as corrida_router
 
 app = FastAPI()
 
@@ -20,3 +21,4 @@ def home():
     return RedirectResponse(url="/docs")
 
 app.include_router(pessoa_router)
+app.include_router(corrida_router)

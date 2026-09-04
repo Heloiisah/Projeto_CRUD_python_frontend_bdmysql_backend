@@ -13,9 +13,9 @@ class CorridaRepository:
         nova_corrida = Corrida(
             descricao_corrida=corrida.descricao_corrida,
             data_corrida=corrida.data_corrida,
-            distancia_5km=corrida.distancia_5km,
-            distancia_10km=corrida.distancia_10km,
-            distancia_25km=corrida.distancia_25km
+            distancia_5km=corrida.distancia5km,
+            distancia_10km=corrida.distancia10km,
+            distancia_25km=corrida.distancia25km
         )
 
         db.add(nova_corrida)
@@ -36,9 +36,9 @@ class CorridaRepository:
 
         corrida_bd.descricao_corrida = corrida.descricao_corrida
         corrida_bd.data_corrida = corrida.data_corrida
-        corrida_bd.distancia_5km = corrida.distancia_5km
-        corrida_bd.distancia_10km = corrida.distancia_10km
-        corrida_bd.distancia_25km = corrida.distancia_25km
+        corrida_bd.distancia_5km = corrida.distancia5km
+        corrida_bd.distancia_10km = corrida.distancia10km
+        corrida_bd.distancia_25km = corrida.distancia25km
 
         db.commit()
         db.refresh(corrida_bd)

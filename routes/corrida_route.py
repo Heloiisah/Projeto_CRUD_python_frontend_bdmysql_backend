@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from database import SessionLocal
 
 from controllers.corrida_controller import CorridaController
-from schemas.corrida_schema import CorridaSchema
+from schemas.corrida_schema import CorridaResposta, CorridaSchema, serializar_corrida
 
 
 router = APIRouter(
@@ -23,36 +23,37 @@ def get_db():
         db.close()
 
 
-@router.get("/")
+@router.get("/", response_model=list[CorridaResposta])
 def listar():
     db = next(get_db())
 
-    return controller.listar(db)
+    return [serializar_corrida(corrida) for corrida in controller.listar(db)]
 
 
-@router.get("/{id}")
+@router.get("/{id}", response_model=CorridaResposta)
 def listar_id(id: int):
     db = next(get_db())
 
-    return controller.listar_id(db, id)
+    return serializar_corrida(controller.listar_id(db, id))
 
 
-@router.post("/")
+@router.post("/", response_model=CorridaResposta)
 def cadastrar(corrida: CorridaSchema):
     db = next(get_db())
 
-    return controller.cadastrar(db, corrida)
+    return serializar_corrida(controller.cadastrar(db, corrida))
 
 
-@router.put("/{id}")
+@router.put("/{id}", response_model=CorridaResposta)
 def alterar(id: int, corrida: CorridaSchema):
     db = next(get_db())
 
-    return controller.alterar(
+    corrida_alterada = controller.alterar(
         db,
         id,
         corrida
     )
+    return serializar_corrida(corrida_alterada)
 
 
 @router.delete("/{id}")
